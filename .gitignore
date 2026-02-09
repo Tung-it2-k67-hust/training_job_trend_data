@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+env/
+
+# Secrets & Configuration (Chứa API Keys, Tokens và Crawl URLs)
+.env
+*.env
+config.json
+secrets.py
+local_settings.py
+
+# Data, Logs & Results (Tránh spam dữ liệu và lộ vết crawl)
+output_data/
+results/
+*.csv
+*.json
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules/
