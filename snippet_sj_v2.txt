@@ -1,0 +1,35 @@
+/p>
+        <div class="count-job">
+            <span>Có 12973 việc làm được tìm thấy</span>
+        </div>
+    </div>
+</div>
+<!-- Count of Job list End -->
+
+<!-- Count of Suggest Job list Start -->
+<!-- Count of Suggest Job list End -->
+<div class="row">
+<!-- Right content -->
+<div class="col-md-9">
+    <!-- Featured_job_start -->
+    <section class="featured-job-area ">
+        <div class="image-list">
+            <!-- single-job-content -->
+                <div class="single-job-items ">
+                    <div class="job-items">
+                        <div class="d-flex justify-content-start align-items-start w-100">
+                            <div class="company-img">
+                                <a href="/viec-lam/guest-experience-maker-russian-speaking-butler-nhan-vien-cham-soc-khach-hang-tieng-nga-job819390" target="_blank" title="Guest Experience Maker (Russian Speaking) (Butler) | Nh&#xE2;n vi&#xEA;n Ch&#x103;m s&#xF3;c Kh&#xE1;ch h&#xE0;ng (Ti&#x1EBF;ng Nga)" class="image-item">
+                                    <img width="80" height="80" loading="lazy" src="/images/logo_company.png" data-src="https://studentjob.vn/resize/120/0/store/2020/2/six-senses-con-dao.jpg" alt="Guest Experience Maker (Russian Speaking) (Butler) | Nh&#xE2;n vi&#xEA;n Ch&#x103;m s&#xF3;c Kh&#xE1;ch h&#xE0;ng (Ti&#x1EBF;ng Nga)">
+                                </a>
+                            </div>
+                            <div class="job-tittle job-tittle2">
+                                <a href="/viec-lam/guest-experience-maker-russian-speaking-butler-nhan-vien-cham-soc-khach-hang-tieng-nga-job819390" target="_blank" title="Guest Experience Maker (Russian Speaking) (Butler) | Nh&#xE2;n vi&#xEA;n Ch&#x103;m s&#xF3;c Kh&#xE1;ch h&#xE0;ng (Ti&#x1EBF;ng Nga)">
+                                    <h2 class="h4">Guest Experience Maker (Russian Speaking) (Butler) | Nh&#xE2;n vi&#xEA;n Ch&#x103;m s&#xF3;c Kh&#xE1;ch h&#xE0;ng (Ti&#x1EBF;ng Nga)</h2>
+                                </a>
+                                <ul>
+                                    <li class="mb-1">
+                                        <img loading="lazy" src="/images/icons/com.png" width="14" alt="icon"> <a href="/cong-ty/six-senses-con-dao-com14463" title="Six Senses C&#xF4;n &#x110;&#x1EA3;o">Six Senses C&#xF4;n &#x110;&#x1EA3;o</a>
+                                    </li>
+                                    <li>
+                                   

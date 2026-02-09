@@ -10,6 +10,11 @@ results/
 *.json
 *.csv
 *.parquet
+data/
+
+# Bronze/Silver layers (local only, not in git)
+bronze/
+silver/
 
 # Node.js
 node_modules/
@@ -27,3 +32,6 @@ Thumbs.db
 
 # External Scrapers
 scrapfly-scrapers/
+
+# Unrelated
+unrelated/

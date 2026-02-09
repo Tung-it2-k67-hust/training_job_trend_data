@@ -1,0 +1,17 @@
+default:
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  timeout_ms: 10000
+  retries: 2
+  backoff_ms: 1000
+
+sites:
+  careerviet:
+    rate_limit_rps: 1
+  vieclam24h:
+    rate_limit_rps: 1
+  studentjob:
+    rate_limit_rps: 1
+  topdev:
+    rate_limit_rps: 0.5
+
+
