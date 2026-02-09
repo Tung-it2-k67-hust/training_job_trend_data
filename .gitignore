@@ -1,28 +1,29 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-.venv
-venv/
-env/
-
-# Secrets & Configuration (Chứa API Keys, Tokens và Crawl URLs)
+# Secrets
 .env
-*.env
-config.json
-secrets.py
-local_settings.py
+*.pem
+*.key
 
-# Data, Logs & Results (Tránh spam dữ liệu và lộ vết crawl)
+# Data & Output
 output_data/
+output_dataset/
 results/
-*.csv
 *.json
-*.log
-
-# OS
-.DS_Store
-Thumbs.db
+*.csv
+*.parquet
 
 # Node.js
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+.venv/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# External Scrapers
+scrapfly-scrapers/

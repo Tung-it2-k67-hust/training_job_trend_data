@@ -1,16 +1,16 @@
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const parquet = require('parquetjs-lite');
 
 // --- CONFIGURATION ---
-const API_KEY = '5c60c4912616a3d214b6ed4504ce0d3c52bfe720a0d57642d7b626849cc88e47';
+const API_KEY = process.env.THE_MUSE_API_KEY;
 const BASE_URL = 'https://www.themuse.com/api/public/jobs';
-const OUTPUT_DIR = 'G:\\My Drive\\big_data';
-// const OUTPUT_DIR = 'E:\\drive_recover'; // Backup option
-const MAX_PAGES_TO_TEST = 2; // Test with 2 pages first
+const OUTPUT_DIR = process.env.OUTPUT_DIR || path.join(__dirname, 'output_data');
 
 // Ensure output directory exists
 if (!fs.existsSync(OUTPUT_DIR)) {
+    console.log(`Creating directory: ${OUTPUT_DIR}`);
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
