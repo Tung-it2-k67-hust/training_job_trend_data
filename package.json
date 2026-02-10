@@ -1,0 +1,21 @@
+{
+  "name": "big_data_job_fetch",
+  "version": "1.0.0",
+  "main": "crawler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.13.5",
+    "cheerio": "^1.2.0",
+    "dotenv": "^17.2.4",
+    "kafkajs": "^2.2.4",
+    "minio": "^8.0.6",
+    "parquetjs-lite": "^0.8.7",
+    "puppeteer": "^24.37.2"
+  }
+}

@@ -7,6 +7,9 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const KAFKA_BROKERS = (process.env.KAFKA_BROKERS || 'localhost:9092').split(',');
 const KAFKA_CLIENT_ID = process.env.KAFKA_CLIENT_ID || 'job-crawler';
 const KAFKA_TOPIC = process.env.KAFKA_TOPIC || 'job-listings-raw';
+const KAFKA_DISABLED = ['1', 'true', 'yes'].includes(
+    (process.env.KAFKA_DISABLED || '').toLowerCase()
+);
 
 const kafka = new Kafka({
     clientId: KAFKA_CLIENT_ID,
@@ -18,6 +21,10 @@ const producer = kafka.producer();
 let isConnected = false;
 
 async function connectProducer() {
+    if (KAFKA_DISABLED) {
+        console.log('Kafka disabled via KAFKA_DISABLED. Skipping connect.');
+        return;
+    }
     if (isConnected) return;
     try {
         console.log('Connecting to Kafka...');
@@ -31,6 +38,9 @@ async function connectProducer() {
 }
 
 async function sendJobToKafka(jobData) {
+    if (KAFKA_DISABLED) {
+        return true;
+    }
     if (!isConnected) {
         await connectProducer();
     }
@@ -54,6 +64,9 @@ async function sendJobToKafka(jobData) {
 }
 
 async function disconnectProducer() {
+    if (KAFKA_DISABLED) {
+        return;
+    }
     if (isConnected) {
         await producer.disconnect();
         isConnected = false;

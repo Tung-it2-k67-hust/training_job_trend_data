@@ -1,0 +1,60 @@
+{
+  "allLinks": 181,
+  "jobLinks": 55,
+  "h3Tags": 0,
+  "strongTags": 4,
+  "divs": 498,
+  "sampleLinks": [
+    {
+      "href": "/jobs/search?ordering=high_low_salary",
+      "text": "Top 100 Highest Salary",
+      "classes": "block rounded-xl px-4 py-2 text-sm hover:text-brand-500"
+    },
+    {
+      "href": "/jobs/search?region_ids=79",
+      "text": "Ho Chi Minh",
+      "classes": "block rounded-xl px-4 py-2 text-sm hover:text-brand-500"
+    },
+    {
+      "href": "/jobs/search?region_ids=01",
+      "text": "Ha Noi",
+      "classes": "block rounded-xl px-4 py-2 text-sm hover:text-brand-500"
+    },
+    {
+      "href": "/jobs/search?region_ids=048",
+      "text": "Da Nang",
+      "classes": "block rounded-xl px-4 py-2 text-sm hover:text-brand-500"
+    },
+    {
+      "href": "/jobs/search",
+      "text": "Jobs",
+      "classes": "flex items-center gap-2 border-b-[2px] border-b-transparent py-2  group-hover:border-b-brand-500"
+    },
+    {
+      "href": "/jobs/search?keyword=Ng%C3%A2n+H%C3%A0ng",
+      "text": "Ngân Hàng",
+      "classes": "line-clamp-1 h-6 rounded-[64px] border border-brand-500 px-3 py-1 text-xs text-brand-500"
+    },
+    {
+      "href": "/jobs/search?keyword=T%C3%A0i+Ch%C3%ADnh",
+      "text": "Tài Chính",
+      "classes": "line-clamp-1 h-6 rounded-[64px] border border-brand-500 px-3 py-1 text-xs text-brand-500"
+    },
+    {
+      "href": "/jobs/search?keyword=Financial",
+      "text": "Financial",
+      "classes": "line-clamp-1 h-6 rounded-[64px] border border-brand-500 px-3 py-1 text-xs text-brand-500"
+    },
+    {
+      "href": "/jobs/search?keyword=Ng%C3%A2n+H%C3%A0ng",
+      "text": "Ngân Hàng",
+      "classes": "line-clamp-1 h-6 rounded-[64px] border border-brand-500 px-3 py-1 text-xs text-brand-500"
+    },
+    {
+      "href": "/jobs/search?keyword=T%C3%A0i+Ch%C3%ADnh",
+      "text": "Tài Chính",
+      "classes": "line-clamp-1 h-6 rounded-[64px] border border-brand-500 px-3 py-1 text-xs text-brand-500"
+    }
+  ],
+  "bodyText": "#nprogress{pointer-events:none}#nprogress .bar{background:#4876EF;position:fixed;z-index:1600;top: 0;left:0;width:100%;height:3px}#nprogress .peg{display:block;position:absolute;right:0;width:100px;height:100%;box-shadow:0 0 10px #4876EF,0 0 5px #4876EF;opacity:1;-webkit-transform:rotate(3deg) translate(0px,-4px);-ms-transform:rotate(3deg) translate(0px,-4px);transform:rotate(3deg) translate(0px,-4px)}#nprogress .spinner{display:block;position:fixed;z-index:1600;top: 15px;right:15px}#nprogress ."
+}

@@ -1,9 +1,12 @@
-const axios = require('axios');
 const { sendJobToKafka, connectProducer, disconnectProducer } = require('../utils/kafka');
+const { getJobIdentity } = require('../utils/identity');
+const { loadExistingKeys, saveToBronze, upsertToSilver, saveToDemo } = require('../utils/storage');
+const { fetchWithRetry, randomDelay } = require('../utils/fetcher');
 
 const SOURCE_NAME = 'topdev';
 const BASE_URL = 'https://topdev.vn';
 const API_URL = 'https://api.topdev.vn/td/v2/jobs/search/v2';
+const DUP_LIMIT = 30;
 
 async function fetchJobsFromAPI(page = 1) {
     const params = {
@@ -28,7 +31,7 @@ async function fetchJobsFromAPI(page = 1) {
 
     try {
         console.log(`Fetching page ${page} from TopDev API...`);
-        const response = await axios.get(API_URL, {
+        const response = await fetchWithRetry(API_URL, {
             params,
             headers,
             timeout: 30000
@@ -102,34 +105,101 @@ async function fetchJobsFromAPI(page = 1) {
 }
 
 async function run() {
-    console.log(`Starting ${SOURCE_NAME} crawler (API-based, Kafka, Smart Freshness)...`);
+    console.log(`\n=== Starting ${SOURCE_NAME} crawler with Early Stop Strategy ===\n`);
+
+    // Load existing keys for duplicate detection
+    const existingKeys = await loadExistingKeys(SOURCE_NAME);
+    console.log(`[Init] Loaded ${existingKeys.size} existing keys\n`);
 
     await connectProducer();
 
+    let duplicateCount = 0;
     let currentPage = 1;
-    const maxPages = 5; // Increased max pages
-    let hasMore = true;
+    const maxPages = 10;
+    const allJobs = [];
 
     try {
-        while (hasMore && currentPage <= maxPages) {
+        while (currentPage <= maxPages) {
+            console.log(`\n--- Page ${currentPage} ---`);
+            
             const result = await fetchJobsFromAPI(currentPage);
 
-            if (result.jobs.length > 0) {
-                for (const job of result.jobs) {
-                    await sendJobToKafka(job);
-                }
-                console.log(`✅ Sent ${result.jobs.length} jobs from page ${currentPage} to Kafka.`);
+            if (result.jobs.length === 0) {
+                console.log('No more jobs found. Stopping.');
+                break;
+            }
 
-                hasMore = result.hasMore;
-                currentPage++;
+            console.log(`Found ${result.jobs.length} jobs`);
 
-                if (hasMore && currentPage <= maxPages) {
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+            for (const job of result.jobs) {
+                // Extract job_id and generate unique_key
+                const { jobId, uniqueKey } = getJobIdentity(job.url, SOURCE_NAME);
+
+                if (!uniqueKey) {
+                    console.warn(`⚠️  Could not extract job_id from: ${job.url}`);
+                    continue;
                 }
-            } else {
-                hasMore = false;
+
+                // Add to job object
+                job.job_id = jobId;
+                job.unique_key = uniqueKey;
+
+                // Check if duplicate
+                if (existingKeys.has(uniqueKey)) {
+                    duplicateCount++;
+                    console.log(`[Duplicate ${duplicateCount}/${DUP_LIMIT}] ${uniqueKey}`);
+
+                    if (duplicateCount >= DUP_LIMIT) {
+                        console.log(`\n✋ Reached ${DUP_LIMIT} consecutive duplicates. Stopping crawl.\n`);
+                        break;
+                    }
+                    continue; // Skip to next job
+                }
+
+                // Reset duplicate count when we find new job
+                duplicateCount = 0;
+
+                console.log(`✅ NEW: ${uniqueKey} - ${job.title}`);
+
+                // Save to Bronze layer (raw)
+                await saveToBronze(job, SOURCE_NAME);
+
+                // Upsert to Silver layer (deduplicated)
+                await upsertToSilver(job, SOURCE_NAME);
+
+                // Send to Kafka
+                await sendJobToKafka(job);
+
+                // Add to existing keys
+                existingKeys.add(uniqueKey);
+                allJobs.push(job);
+            }
+
+            // Check if we should stop
+            if (duplicateCount >= DUP_LIMIT) {
+                break;
+            }
+
+            currentPage++;
+
+            // Random delay before next page
+            if (currentPage <= maxPages) {
+                await randomDelay();
             }
         }
+
+        console.log(`\n=== Crawl Summary ===`);
+        console.log(`Total new jobs: ${allJobs.length}`);
+        console.log(`Final duplicate count: ${duplicateCount}`);
+        console.log(`Pages crawled: ${currentPage - 1}`);
+
+        // Save demo file
+        if (allJobs.length > 0) {
+            await saveToDemo(allJobs, SOURCE_NAME);
+        }
+
+        console.log(`✅ Completed ${SOURCE_NAME} crawl\n`);
+
     } catch (error) {
         console.error('Error in crawl loop:', error.message);
     } finally {

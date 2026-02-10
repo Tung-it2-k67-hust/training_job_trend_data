@@ -24,9 +24,8 @@ async function compareData() {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             },
             httpsAgent: new (require('https').Agent)({
-                // CẢNH BÁO: Chỉ dùng rejectUnauthorized: false khi debug local. 
-                // Nên xóa bỏ hoặc chuyển thành true khi chạy thực tế.
-                rejectUnauthorized: false
+                // Chỉ tắt kiểm tra SSL khi ở môi trường debug local
+                rejectUnauthorized: process.env.NODE_ENV === 'development' ? false : true
             })
         });
 

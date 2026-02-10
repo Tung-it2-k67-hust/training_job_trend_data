@@ -1,37 +1,12 @@
-# Secrets
-.env
-*.pem
-*.key
-
-# Data & Output
-output_data/
-output_dataset/
-results/
-*.json
-*.csv
-*.parquet
-data/
-
-# Bronze/Silver layers (local only, not in git)
-bronze/
-silver/
-
-# Node.js
+# Dependency folders
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# Python
-__pycache__/
-.venv/
+# Debug/Temporary HTML files (Tránh lộ API keys từ trang web mục tiêu)
+temp_*.html
+inspect_*.html
+topdev_rendered.html
+snippet*.txt
 
-# OS Files
-.DS_Store
-Thumbs.db
-
-# External Scrapers
-scrapfly-scrapers/
-
-# Unrelated
-unrelated/
+# Scraped Data
+debug_*.json
+data/
